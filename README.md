@@ -1,7 +1,7 @@
 # UniPath
 
 ## A Unified Multimodal Generative Foundation Model for Precision Oncology
-<img src="assets/logo.png" width="200px" align="right" />
+<img src="assets/logo.png" width="210px" align="right" />
 <!-- [Journal Link]() | [Download Model]() | [Cite](#reference) -->
 
  [Download Model](https://huggingface.co/UniPath278/UniPath)
@@ -13,7 +13,7 @@
 ## Installation
  
 ```bash
-git clone https://github.com/xxx/UniPath.git
+git clone https://github.com/UniPath278/UniPath
 cd UniPath
  
 conda create -n unipath python=3.10 -y
@@ -36,25 +36,26 @@ login()  # https://huggingface.co/settings/tokens
 model = AutoModel.from_pretrained('xxx/UniPath', trust_remote_code=True)
 ```
  
-### 2. Patch Feature Extraction
+### 2. Feature Extraction
  
-UniPath takes [CONCH v1.5](https://huggingface.co/MahmoodLab/TITAN) patch features as input. We use [TRIDENT](https://github.com/mahmoodlab/TRIDENT) for WSI preprocessing and feature extraction. To adapt TRIDENT for UniPath:
+UniPath uses [TRIDENT](https://github.com/mahmoodlab/TRIDENT) for WSI preprocessing and feature extraction. Depending on the task, you need either patch-level or slide-level features:
  
-1. **Register the UniPath slide encoder**: Add the UniPath model config to `trident/models/` and register it as a slide-level encoder.
-2. **Add the model weights**: Place the downloaded UniPath weights under `trident/checkpoints/unipath/`.
-3. **Update the task config**: In `configs/`, add a task entry that specifies `unipath` as the `slide_encoder`.
+#### Patch-level Features (for Training & Generative Inference)
  
-Once configured, run:
+Patch-level features are used for **all training stages** and **generative inference** (report generation & VQA). This uses the standard CONCH v1.5 extraction in TRIDENT — **no code modification is needed**:
  
 ```bash
-python run_batch_of_slides.py \
-    --task all \
-    --wsi_dir ./wsis \
-    --job_dir ./trident_processed \
-    --patch_encoder conch_v15 \
-    --slide_encoder unipath \
-    --patch_size 512 \
-    --mag 20
+python run_batch_of_slides.py --task all --wsi_dir ./wsis --job_dir ./trident_processed --patch_encoder conch_v15 --patch_size 512 --mag 20
+```
+ 
+#### Slide-level Features (for Discriminative Inference)
+ 
+Slide-level embeddings are needed for **discriminative tasks** (classification, biomarker prediction, survival prognosis, etc.). Since UniPath's slide encoder shares the same architecture as TITAN, you can directly replace the TITAN model weights with UniPath's and use TITAN's extraction pipeline. See [`./trident_modifications/README.md`](./trident_modifications/README.md) for detailed instructions.
+ 
+After modification, run:
+ 
+```bash
+python run_batch_of_slides.py --task all --wsi_dir ./wsis --job_dir ./trident_processed --slide_encoder titan --patch_size 512 --mag 20
 ```
  
 ## Training
