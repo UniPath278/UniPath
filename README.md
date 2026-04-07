@@ -86,13 +86,14 @@ We provide **pre-extracted demo features** so you can run inference directly wit
 ### VQA Inference Command
 
 Run the inference after entering the project root directory:
+```bash
 python ./xtuner/tools/test.py \
   ./xtuner/configs/slidechat/stage_2.py \
   --checkpoint <PATH_TO_MODEL_WEIGHTS> \
   --test_slide_csv <PATH_TO_TEST_QUESTIONS_CSV> \
   --test_output_csv <PATH_TO_SAVE_RESULTS_CSV> \
   --local_rank 0
-  
+```
 ### Generative Tasks (Report Generation & VQA)
  
 Generative tasks take **patch-level features** (CONCH v1.5) directly as input — no slide-level aggregation is needed.
