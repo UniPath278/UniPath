@@ -83,7 +83,17 @@ python train.py --stage 3 --config configs/stage3_refinement.yaml
  
 We provide **pre-extracted demo features** so you can run inference directly without the extraction pipeline. The demo features can be downloaded from [Hugging Face]().
 <!-- Replace with actual HF dataset link -->
- 
+
+### VQA Inference Command
+
+Run the inference after entering the project root directory:
+python ./xtuner/tools/test.py \
+  ./xtuner/configs/slidechat/stage_2.py \
+  --checkpoint <PATH_TO_MODEL_WEIGHTS> \
+  --test_slide_csv <PATH_TO_TEST_QUESTIONS_CSV> \
+  --test_output_csv <PATH_TO_SAVE_RESULTS_CSV> \
+  --local_rank 0
+  
 ### Generative Tasks (Report Generation & VQA)
  
 Generative tasks take **patch-level features** (CONCH v1.5) directly as input — no slide-level aggregation is needed.
