@@ -21,6 +21,7 @@ conda activate unipath
 pip install --upgrade pip
 pip install -e .
 ```
+
  
 ## Getting Started
  
@@ -58,27 +59,7 @@ After modification, run:
 python run_batch_of_slides.py --task all --wsi_dir ./wsis --job_dir ./trident_processed --slide_encoder titan --patch_size 512 --mag 20
 ```
  
-## Training
- 
-UniPath adopts a three-stage training strategy:
- 
-1. **Stage 1 — Cross-modal alignment**: Aligns visual and linguistic representations using WSI–report pairs.
-2. **Stage 2 — End-to-end instruction tuning**: Joint optimization on WSI–report pairs and VQA data.
-3. **Stage 3 — Knowledge-augmented refinement**: Incorporates structured pathology knowledge for clinical consistency.
- 
-```bash
-# Stage 1: Cross-modal alignment
-python train.py --stage 1 --config configs/stage1_alignment.yaml
- 
-# Stage 2: Instruction tuning
-python train.py --stage 2 --config configs/stage2_instruction.yaml
- 
-# Stage 3: Knowledge-augmented refinement
-python train.py --stage 3 --config configs/stage3_refinement.yaml
-```
- 
-Adjust training commands to match actual scripts
- 
+
 ## Inference
  
 We provide **pre-extracted demo features** so you can run inference directly without the extraction pipeline. The demo features can be downloaded from [Hugging Face]().
@@ -108,6 +89,30 @@ python inference_slide_embedding.py \
     --model_path ./checkpoints/unipath \
     --output_dir ./results/slide_embeddings
 ```
+
+
+## Training
+ 
+UniPath adopts a three-stage training strategy:
+ 
+1. **Stage 1 — Cross-modal alignment**: Aligns visual and linguistic representations using WSI–report pairs.
+2. **Stage 2 — End-to-end instruction tuning**: Joint optimization on WSI–report pairs and VQA data.
+3. **Stage 3 — Knowledge-augmented refinement**: Incorporates structured pathology knowledge for clinical consistency.
+ 
+```bash
+# Stage 1: Cross-modal alignment
+python train.py --stage 1 --config configs/stage1_alignment.yaml
+ 
+# Stage 2: Instruction tuning
+python train.py --stage 2 --config configs/stage2_instruction.yaml
+ 
+# Stage 3: Knowledge-augmented refinement
+python train.py --stage 3 --config configs/stage3_refinement.yaml
+```
+ 
+Adjust training commands to match actual scripts
+ 
+
  
 <!-- Adjust script names and arguments to match actual codebase -->
 
