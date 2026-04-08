@@ -76,11 +76,16 @@ We provide **pre-extracted demo features** so you can run inference directly wit
 Generative tasks take **patch-level features** (CONCH v1.5) directly as input — no slide-level aggregation is needed.
  
 ```bash
+CUDA_VISIBLE_DEVICES=<GPU_ID> \
+PYTHONPATH=. \
 python ./xtuner/tools/test.py \
-  ./xtuner/configs/slidechat/stage_2.py \
-  --checkpoint <PATH_TO_MODEL_WEIGHTS> \
-  --test_slide_csv <PATH_TO_TEST_QUESTIONS_CSV> \
-  --test_output_csv <PATH_TO_SAVE_RESULTS_CSV> \
+  ./xtuner/configs/slidechat/stage_4.py \
+  --checkpoint <PATH_TO_CHECKPOINT> \
+  --vision_weight_path <PATH_TO_TITAN_WEIGHT> \
+  --llm_path <PATH_TO_LLM> \
+  --feature_dir <PATH_TO_FEATURE_DIR> \
+  --test_slide_csv <PATH_TO_TEST_CSV> \
+  --test_output_csv <PATH_TO_OUTPUT_CSV> \
   --local_rank 0
 ```
  
