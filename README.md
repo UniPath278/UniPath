@@ -67,8 +67,8 @@ python run_batch_of_slides.py --task all --wsi_dir ./wsis --job_dir ./trident_pr
 
 ## Inference
  
-We provide **pre-extracted demo features** so you can run inference directly without the extraction pipeline. The demo features can be downloaded from [Hugging Face]().
-<!-- Replace with actual HF dataset link -->
+We provide **pre-extracted demo features** so you can run inference directly without the extraction pipeline. The demo features can be downloaded from [Hugging Face](https://huggingface.co/UniPath278/UniPath).
+
 
 
 ### Generative Tasks (Report Generation & VQA)
@@ -99,7 +99,14 @@ python inference_slide_embedding.py \
     --model_path ./checkpoints/unipath \
     --output_dir ./results/slide_embeddings
 ```
+We provide pre-extracted features for demo evaluation.
 
+Download the EBRAINS features from [Hugging Face](https://huggingface.co/UniPath278/UniPath_Model/tree/main/feature) and place them under `./evaluation/`.
+Then run the evaluation script directly:
+ 
+```bash
+python evaluation/ebrains12_slide_logistic_regression.py
+```
 
 ## Training
  
