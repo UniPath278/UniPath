@@ -36,7 +36,12 @@ from transformers import AutoModel
 login()  # https://huggingface.co/settings/tokens
 model = AutoModel.from_pretrained('UniPath278/UniPath', trust_remote_code=True)
 ```
+**Base LLM**: UniPath uses [Qwen2.5-7B](https://huggingface.co/Qwen/Qwen2.5-7B) as the language decoder for generative tasks. Download and place it under the project root:
  
+```bash
+huggingface-cli download Qwen/Qwen2.5-7B --local-dir ./qwen7B
+``` 
+
 ### 2. Feature Extraction
  
 UniPath uses [TRIDENT](https://github.com/mahmoodlab/TRIDENT) for WSI preprocessing and feature extraction. Depending on the task, you need either patch-level or slide-level features:
@@ -127,9 +132,9 @@ Adjust training commands to match actual scripts
 | `notebooks/vqa_demo.ipynb` | Visual question answering |
 | `notebooks/zeroshot_demo.ipynb` | Zero-shot classification | -->
 
-<!-- ## License
+## License
 
-ⓒ [Lab Name]. Released under [CC-BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.en) for non-commercial academic research only. -->
+ⓒ [Lab Name]. Released under [CC-BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.en) for non-commercial academic research only.
 
 <!-- ## Reference
 
