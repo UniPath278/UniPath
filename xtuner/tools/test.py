@@ -164,8 +164,6 @@ def main():
         print('*'*30)
         print('id: ', i)
         case_name = df_test_case.loc[i, 'image']
-        # test_image_file = "/home/liangyuci/SlideChat/BCNB_patch_feat" + df_test_case.loc[i, 'Tumor'] + "/" + case_name + ".csv"
-        # test_image_file = "/home/liangyuci/REG2025_feature/REG2025_feature_conch_v1.5/" + "/" + str(case_name) 
         if args.feature_dir is None:
             raise ValueError("You must provide --feature_dir")
 
@@ -182,14 +180,6 @@ def main():
             raise ValueError("You must provide --vision_weight_path")
         titan = TitanVisionTower(
             config_path="/home/liangyuci/SlideChat-titan/xtuner/model/titan/TITAN_local/config.json",
-            # weight_path="/home/liangyuci/SlideChat-titan/xtuner/model/titan/TITAN_local/model_without_text_encoder.safetensors"
-            #weight_path="/home/liangyuci/SlideChat-titan/work_dirs/stage2-titan-qwen3/converted_model_not_pj.safetensors"
-            #weight_path="/home/liangyuci/SlideChat-titan/work_dirs/stage4-titan-all-data/epoch_1.pth/converted_model_not_pj_llm.safetensors"
-            #weight_path="/home/liangyuci/SlideChat-titan/work_dirs/stage4-titan-qwen3-basestage1/epoch_1.pth/converted_model_not_pj_llm.safetensors"
-            #weight_path="/home/liangyuci/SlideChat-titan/work_dirs/stage4-institution/epoch_1.pth/converted_model_not_pj_llm.safetensors"
-            #weight_path="/home/liangyuci/SlideChat-titan/work_dirs/stage4-knowledge-report/epoch_1.pth/converted_model_not_pj_llm.safetensors"
-             #weight_path="/home/liangyuci/SlideChat-titan/work_dirs/stage4-titan-base-histai-TCGA-report-konw/epoch_1.pth/Know_TCGA_base_histai_converted_model_not_pj_llm.safetensors"
-             #weight_path="/home/liangyuci/SlideChat-titan/work_dirs/stage4-titan-base-histai-TCGA-report/epoch_1.pth/converted_model_not_pj_llm.safetensors"
              weight_path=args.vision_weight_path
         )
         titan_output = titan(pixel_values, coords, patch_size_lv0)  
