@@ -39,8 +39,13 @@ model = AutoModel.from_pretrained('UniPath278/UniPath', trust_remote_code=True)
 **Base LLM**: UniPath uses [Qwen2.5-7B](https://huggingface.co/Qwen/Qwen2.5-7B) as the language decoder for generative tasks. Download and place it under the project root:
  
 ```bash
+# Download Qwen2.5-7B
 huggingface-cli download Qwen/Qwen2.5-7B --local-dir ./qwen7B
-``` 
+```
+Then, you can manually edit xtuner/configs/unipath/stage_4.py and set: 
+```bash
+llm_name_or_path = "./qwen7B"
+```
 
 ### 2. Feature Extraction
  
