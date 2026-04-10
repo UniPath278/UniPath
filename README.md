@@ -42,7 +42,7 @@ model = AutoModel.from_pretrained('UniPath278/UniPath', trust_remote_code=True)
 # Download Qwen2.5-7B
 huggingface-cli download Qwen/Qwen2.5-7B --local-dir ./qwen7B
 ```
-Then, you can manually edit xtuner/configs/unipath/stage_4.py and set: 
+Then, you can manually edit [`xtuner/configs/unipath/stage_4.py`](https://github.com/UniPath278/UniPath/blob/main/xtuner/configs/unipath/stage_4.py) and set: 
 ```bash
 llm_name_or_path = "./qwen7B"
 ```
