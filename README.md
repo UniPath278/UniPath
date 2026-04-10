@@ -91,20 +91,7 @@ self.titan = TitanVisionTower(
     weight_path="Discriminative_tasks_weight/UniPath_Slide.safetensors"
 )
 ```
-```bash
-CUDA_VISIBLE_DEVICES=<GPU_ID> \
-PYTHONPATH=. \
-python ./xtuner/tools/test.py \
-  ./xtuner/configs/unipath/stage_4.py \
-  --checkpoint <PATH_TO_CHECKPOINT> \
-  --vision_weight_path <PATH_TO_TITAN_WEIGHT> \
-  --llm_path <PATH_TO_QWEN> \
-  --feature_dir <PATH_TO_FEATURE_DIR> \
-  --test_slide_csv <PATH_TO_TEST_CSV> \
-  --test_output_csv <PATH_TO_OUTPUT_CSV> \
-  --local_rank 0
-```
- 
+
 We provide a few simple examples in `evaluation/Report.csv` and `evaluation/VQA-close.csv`, with the corresponding features already included under `evaluation/feature_conch_v15`.
  
 You can quickly try the following commands:
@@ -113,21 +100,23 @@ You can quickly try the following commands:
 # Report Generation
 CUDA_VISIBLE_DEVICES=<GPU_ID> PYTHONPATH=. python ./xtuner/tools/test.py \
   ./xtuner/configs/unipath/stage_4.py \
-  --checkpoint <PATH_TO_CHECKPOINT> \
+  --checkpoint ./Generative_task_weights/epoch_1.pth \
+  --vision_weight_path ./Discriminative_tasks_weight/UniPath_Slide.safetensor \
   --llm_path ./qwen7B \
-  --feature_dir ./evaluation/feature_conch_v15 \
+  --feature_dir ./evaluation/feature_conch_v15/ \
   --test_slide_csv ./evaluation/Report.csv \
-  --test_output_csv ./results/Report_output.csv \
+  --test_output_csv ./results/Report-answer.csv \
   --local_rank 0
  
 # VQA
 CUDA_VISIBLE_DEVICES=<GPU_ID> PYTHONPATH=. python ./xtuner/tools/test.py \
   ./xtuner/configs/unipath/stage_4.py \
-  --checkpoint <PATH_TO_CHECKPOINT> \
+  --checkpoint ./Generative_task_weights/epoch_1.pth \
+  --vision_weight_path ./Discriminative_tasks_weight/UniPath_Slide.safetensor \
   --llm_path ./qwen7B \
-  --feature_dir ./evaluation/feature_conch_v15 \
+  --feature_dir ./evaluation/feature_conch_v15/ \
   --test_slide_csv ./evaluation/VQA-close.csv \
-  --test_output_csv ./results/VQA_output.csv \
+  --test_output_csv ./results/VQA-answer.csv \
   --local_rank 0
 ```
  
