@@ -105,6 +105,33 @@ python ./xtuner/tools/test.py \
   --local_rank 0
 ```
  
+We provide a few simple examples in `evaluation/Report.csv` and `evaluation/VQA-close.csv`, with the corresponding features already included under `evaluation/feature_conch_v15`.
+ 
+You can quickly try the following commands:
+ 
+```bash
+# Report Generation
+CUDA_VISIBLE_DEVICES=<GPU_ID> PYTHONPATH=. python ./xtuner/tools/test.py \
+  ./xtuner/configs/unipath/stage_4.py \
+  --checkpoint <PATH_TO_CHECKPOINT> \
+  --llm_path ./qwen7B \
+  --feature_dir ./evaluation/feature_conch_v15 \
+  --test_slide_csv ./evaluation/Report.csv \
+  --test_output_csv ./results/Report_output.csv \
+  --local_rank 0
+ 
+# VQA
+CUDA_VISIBLE_DEVICES=<GPU_ID> PYTHONPATH=. python ./xtuner/tools/test.py \
+  ./xtuner/configs/unipath/stage_4.py \
+  --checkpoint <PATH_TO_CHECKPOINT> \
+  --llm_path ./qwen7B \
+  --feature_dir ./evaluation/feature_conch_v15 \
+  --test_slide_csv ./evaluation/VQA-close.csv \
+  --test_output_csv ./results/VQA_output.csv \
+  --local_rank 0
+```
+ 
+
 ### Discriminative Tasks (Slide-level Embedding)
  
 For prediction tasks (classification, biomarker prediction, survival prognosis, etc.), UniPath first aggregates patch features into a **slide-level embedding** via its hierarchical visual encoder.
