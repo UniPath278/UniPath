@@ -22,7 +22,7 @@ from xtuner.utils import PROMPT_TEMPLATE
 #                          PART 1  Settings                           #
 #######################################################################
 # Model
-llm_name_or_path = '/home/liangyuci/SlideChat_weight/Qwen2.5-7B-Instruct'
+llm_name_or_path = './Qwen2.5-7B-Instruct'
 
 # Data
 data_path = './institution-data/merged_train-h5-institution-add-know-stage3-619.json'
