@@ -42,8 +42,10 @@ model = AutoModel.from_pretrained('UniPath278/UniPath', trust_remote_code=True)
 # Download Qwen2.5-7B
 huggingface-cli download Qwen/Qwen2.5-7B --local-dir ./qwen7B
 ```
-Then, you can manually edit [`xtuner/configs/unipath/stage_4.py`](https://github.com/UniPath278/UniPath/blob/main/xtuner/configs/unipath/stage_4.py) and set: 
-```bash
+Then, update `llm_name_or_path` in  
+[`xtuner/configs/unipath/stage_4.py`](https://github.com/UniPath278/UniPath/blob/main/xtuner/configs/unipath/stage_4.py) to:
+
+```python
 llm_name_or_path = "./qwen7B"
 ```
 
@@ -76,10 +78,20 @@ We provide **pre-extracted demo features** so you can run inference directly wit
 
 
 
-### Generative Tasks (Report Generation & VQA)
- 
-Generative tasks take **patch-level features** (CONCH v1.5) directly as input — no slide-level aggregation is needed.
- 
+### Generative Tasks
+
+Generative tasks take patch-level features (CONCH v1.5) directly as input — no slide-level aggregation is needed.
+
+Then, update the `weight_path` in  
+[`xtuner/model/llava.py`](https://github.com/UniPath278/UniPath/blob/main/xtuner/model/llava.py) to use the discriminative task weights from  
+[Discriminative_tasks_weight](https://huggingface.co/UniPath278/UniPath_Model/tree/main/Discriminative_tasks_weight):
+
+```python
+self.titan = TitanVisionTower(
+    config_path="./xtuner/model/titan/TITAN_local/config.json",
+    weight_path="Discriminative_tasks_weight/UniPath_Slide.safetensors"
+)
+```
 ```bash
 CUDA_VISIBLE_DEVICES=<GPU_ID> \
 PYTHONPATH=. \
