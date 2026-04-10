@@ -79,10 +79,10 @@ Generative tasks take **patch-level features** (CONCH v1.5) directly as input â€
 CUDA_VISIBLE_DEVICES=<GPU_ID> \
 PYTHONPATH=. \
 python ./xtuner/tools/test.py \
-  ./xtuner/configs/slidechat/stage_4.py \
+  ./xtuner/configs/unipath/stage_4.py \
   --checkpoint <PATH_TO_CHECKPOINT> \
   --vision_weight_path <PATH_TO_TITAN_WEIGHT> \
-  --llm_path <PATH_TO_LLM> \
+  --llm_path <PATH_TO_QWEN> \
   --feature_dir <PATH_TO_FEATURE_DIR> \
   --test_slide_csv <PATH_TO_TEST_CSV> \
   --test_output_csv <PATH_TO_OUTPUT_CSV> \
