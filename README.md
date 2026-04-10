@@ -83,8 +83,7 @@ We provide **pre-extracted demo features** so you can run inference directly wit
 Generative tasks take patch-level features (CONCH v1.5) directly as input — no slide-level aggregation is needed.
 
 Then, update the `weight_path` in  
-[`xtuner/model/llava.py`](https://github.com/UniPath278/UniPath/blob/main/xtuner/model/llava.py) to use the discriminative task weights from  
-[Discriminative_tasks_weight](https://huggingface.co/UniPath278/UniPath_Model/tree/main/Discriminative_tasks_weight):
+[`xtuner/model/llava.py`](https://github.com/UniPath278/UniPath/blob/main/xtuner/model/llava.py) to use the discriminative task weights from  [Discriminative_tasks_weight](https://huggingface.co/UniPath278/UniPath_Model/tree/main/Discriminative_tasks_weight):
 
 ```python
 self.titan = TitanVisionTower(
@@ -125,9 +124,9 @@ Then run the evaluation script directly:
 python evaluation/ebrains12_slide_logistic_regression.py
 ```
 
-## Training
- 
-UniPath adopts a three-stage training strategy:
+<!-- ## Training -->
+
+<!-- UniPath adopts a three-stage training strategy:
  
 1. **Stage 1 — Cross-modal alignment**: Aligns visual and linguistic representations using WSI–report pairs.
 2. **Stage 2 — End-to-end instruction tuning**: Joint optimization on WSI–report pairs and VQA data.
@@ -145,7 +144,7 @@ python train.py --stage 3 --config configs/stage3_refinement.yaml
 ```
  
 Adjust training commands to match actual scripts
- 
+  -->
 
  
 <!-- Adjust script names and arguments to match actual codebase -->
