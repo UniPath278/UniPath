@@ -26,16 +26,19 @@ pip install -e .
 ## Getting Started
  
 ### 1. Download Model Weights
- 
-Request access and download from [Hugging Face](https://huggingface.co/UniPath278/UniPath).
- 
-```python
-from huggingface_hub import login
-from transformers import AutoModel
- 
-login()  # https://huggingface.co/settings/tokens
-model = AutoModel.from_pretrained('UniPath278/UniPath', trust_remote_code=True)
+
+Request access and download from [Hugging Face](https://huggingface.co/UniPath278/UniPath_Model). UniPath consists of two sets of weights:
+
+- **Discriminative weights** (`UniPath_Slide.safetensors`): the hierarchical slide encoder, used by **both** discriminative tasks and generative tasks (as the vision tower).
+- **Generative weights** (`epoch_1.pth`): the multimodal instruction-tuned checkpoint, used for report generation and VQA.
+
+After downloading, place them under the project root so the directory looks like:
+
 ```
+./Discriminative_tasks_weight/UniPath_Slide.safetensors
+./Generative_task_weights/epoch_1.pth
+```
+
 **Base LLM**: UniPath uses [Qwen2.5-7B](https://huggingface.co/Qwen/Qwen2.5-7B) as the language decoder for generative tasks. Download and place it under the project root:
  
 ```bash
@@ -77,49 +80,63 @@ python run_batch_of_slides.py --task all --wsi_dir ./wsis --job_dir ./trident_pr
 We provide **pre-extracted demo features** so you can run inference directly without the extraction pipeline. The demo features can be downloaded from [Hugging Face](https://huggingface.co/UniPath278/UniPath).
 
 
-
 ### Generative Tasks
 
 Generative tasks take patch-level features (CONCH v1.5) directly as input — no slide-level aggregation is needed.
 
-Then, update the `weight_path` in  
-[`xtuner/model/llava.py`](https://github.com/UniPath278/UniPath/blob/main/xtuner/model/llava.py) to use the discriminative task weights from  [Discriminative_tasks_weight](https://huggingface.co/UniPath278/UniPath_Model/tree/main/Discriminative_tasks_weight):
+Update the `weight_path` in [`xtuner/model/llava.py`](https://github.com/UniPath278/UniPath/blob/main/xtuner/model/llava.py) to point to the discriminative slide encoder weights:
 
 ```python
 self.titan = TitanVisionTower(
     config_path="./xtuner/model/titan/TITAN_local/config.json",
-    weight_path="Discriminative_tasks_weight/UniPath_Slide.safetensors"
+    weight_path="./Discriminative_tasks_weight/UniPath_Slide.safetensors"
 )
 ```
 
-We provide a few simple examples in `evaluation/Report.csv` and `evaluation/VQA-close.csv`, with the corresponding features already included under `evaluation/feature_conch_v15`.
- 
-You can quickly try the following commands:
- 
+Both report generation and VQA share the same entry script. The general command is:
 ```bash
-# Report Generation
-CUDA_VISIBLE_DEVICES=<GPU_ID> PYTHONPATH=. python ./xtuner/tools/test.py \
+CUDA_VISIBLE_DEVICES=<GPU_ID> \
+PYTHONPATH=. \
+python ./xtuner/tools/test.py \
   ./xtuner/configs/unipath/stage_4.py \
-  --checkpoint ./Generative_task_weights/epoch_1.pth \
-  --vision_weight_path ./Discriminative_tasks_weight/UniPath_Slide.safetensor \
-  --llm_path ./qwen7B \
-  --feature_dir ./evaluation/feature_conch_v15/ \
-  --test_slide_csv ./evaluation/Report.csv \
-  --test_output_csv ./results/Report-answer.csv \
-  --local_rank 0
- 
-# VQA
-CUDA_VISIBLE_DEVICES=<GPU_ID> PYTHONPATH=. python ./xtuner/tools/test.py \
-  ./xtuner/configs/unipath/stage_4.py \
-  --checkpoint ./Generative_task_weights/epoch_1.pth \
-  --vision_weight_path ./Discriminative_tasks_weight/UniPath_Slide.safetensor \
-  --llm_path ./qwen7B \
-  --feature_dir ./evaluation/feature_conch_v15/ \
-  --test_slide_csv ./evaluation/VQA-close.csv \
-  --test_output_csv ./results/VQA-answer.csv \
+  --checkpoint <PATH_TO_CHECKPOINT> \
+  --vision_weight_path <PATH_TO_TITAN_WEIGHT> \
+  --llm_path <PATH_TO_QWEN> \
+  --feature_dir <PATH_TO_FEATURE_DIR> \
+  --test_slide_csv <PATH_TO_TEST_CSV> \
+  --test_output_csv <PATH_TO_OUTPUT_CSV> \
   --local_rank 0
 ```
  
+
+
+We provide a few simple examples in `evaluation/Report_Sample.csv` and `evaluation/VQA_Sample.csv`, with the corresponding features already included under `evaluation/feature_conch_v15`.
+
+You can quickly try the following commands:
+
+```bash
+# Report Generation
+CUDA_VISIBLE_DEVICES=<GPU_ID> PYTHONPATH=. python ./xtuner/tools/test.py \
+  ./xtuner/configs/unipath/stage_3.py \
+  --checkpoint ./Generative_task_weights/epoch_1.pth \
+  --vision_weight_path ./Discriminative_tasks_weight/UniPath_Slide.safetensors \
+  --llm_path ./qwen7B \
+  --feature_dir ./evaluation/feature_conch_v15/ \
+  --test_slide_csv ./evaluation/Report_Sample.csv \
+  --test_output_csv ./results/Report-answer.csv \
+  --local_rank 0
+
+# VQA
+CUDA_VISIBLE_DEVICES=<GPU_ID> PYTHONPATH=. python ./xtuner/tools/test.py \
+  ./xtuner/configs/unipath/stage_3.py \
+  --checkpoint ./Generative_task_weights/epoch_1.pth \
+  --vision_weight_path ./Discriminative_tasks_weight/UniPath_Slide.safetensors \
+  --llm_path ./qwen7B \
+  --feature_dir ./evaluation/feature_conch_v15/ \
+  --test_slide_csv ./evaluation/VQA_Sample.csv \
+  --test_output_csv ./results/VQA-answer.csv \
+  --local_rank 0
+```
 
 ### Discriminative Tasks (Slide-level Embedding)
  
