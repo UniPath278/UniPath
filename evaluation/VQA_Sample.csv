@@ -1,0 +1,19 @@
+﻿metadata,question,image,T-answer,question_id
+diagnosis,"Based on the observed features, what do you think is the correct histological classification of the tumor? A) Invasive lobular carcinoma; B) Invasive carcinoma of no special type; C) Ductal carcinoma in situ; D) Mucinous carcinoma",PIT_01_00993_01.h5,B,PIT_01_00993_01-1-1
+morphology,What is the nuclear grade of this tumor? A) Grade 1; B) Grade 2; C) Grade 3; D) Undetermined,PIT_01_00993_01.h5,B,PIT_01_00993_01-1-5
+diagnosis,"Based on the observed features, what do you think is the correct histological classification of the tumor?
+A) Mucoepidermoid carcinoma
+B) Neuroendocrine carcinoma
+C) Adenocarcinoma
+D) Squamous cell carcinoma",PrimaryTumor_HE_001.h5,D,PrimaryTumor_HE_001-1
+grading,"What is the grading of this tumor according to its differentiation? A) G1 - Well differentiated
+B) G2 - Moderately differentiated
+C) G3 - Poorly differentiated
+D) G4 - Undifferentiated",PrimaryTumor_HE_702.h5,B,VQA_Grading_PrimaryTumor_HE_702
+open,Can you provide an overall description of this whole slide image?,TCGA-AF-2689-01Z-00-DX1.38242a22-4fcd-471f-a81c-56a5fe6f9a3a.h5,---,TCGA-AF-2689-01Z-00-DX1.38242a22-4fcd-471f-a81c-56a5fe6f9a3a-1
+open,What observations can you make about the tissue architecture on this slide?,TCGA-AF-2689-01Z-00-DX1.38242a22-4fcd-471f-a81c-56a5fe6f9a3a.h5,---,TCGA-AF-2689-01Z-00-DX1.38242a22-4fcd-471f-a81c-56a5fe6f9a3a-2
+open,What are the notable features of the cellular morphology in this slide?,TCGA-AF-2689-01Z-00-DX1.38242a22-4fcd-471f-a81c-56a5fe6f9a3a.h5,---,TCGA-AF-2689-01Z-00-DX1.38242a22-4fcd-471f-a81c-56a5fe6f9a3a-3
+open,What observations can you make about the tissue architecture on this slide?,TCGA-LQ-A4E4-01Z-00-DX1.CF422C39-614F-4F14-813B-95BB7B171977.h5,---,TCGA-LQ-A4E4-01Z-00-DX1.CF422C39-614F-4F14-813B-95BB7B171977-1
+open,Are the malignant epithelial cells infiltrating the surrounding stroma?,TCGA-LQ-A4E4-01Z-00-DX1.CF422C39-614F-4F14-813B-95BB7B171977.h5,---,TCGA-LQ-A4E4-01Z-00-DX1.CF422C39-614F-4F14-813B-95BB7B171977-2
+open,Is there minimal formation of glandular structures observed?,TCGA-LQ-A4E4-01Z-00-DX1.CF422C39-614F-4F14-813B-95BB7B171977.h5,---,TCGA-LQ-A4E4-01Z-00-DX1.CF422C39-614F-4F14-813B-95BB7B171977-3
+open,Can you describe the pattern of tumor infiltration?,TCGA-LQ-A4E4-01Z-00-DX1.CF422C39-614F-4F14-813B-95BB7B171977.h5,---,TCGA-LQ-A4E4-01Z-00-DX1.CF422C39-614F-4F14-813B-95BB7B171977-4

@@ -42,12 +42,12 @@ model = AutoModel.from_pretrained('UniPath278/UniPath', trust_remote_code=True)
 # Download Qwen2.5-7B
 huggingface-cli download Qwen/Qwen2.5-7B --local-dir ./qwen7B
 ```
-Then, update `llm_name_or_path` in  
-[`xtuner/configs/unipath/stage_4.py`](https://github.com/UniPath278/UniPath/blob/main/xtuner/configs/unipath/stage_4.py) to:
+<!-- Then, update `llm_name_or_path` in  
+[`xtuner/configs/unipath/stage_3.py`](https://github.com/UniPath278/UniPath/blob/main/xtuner/configs/unipath/stage_4.py) to:
 
 ```python
 llm_name_or_path = "./qwen7B"
-```
+``` -->
 
 ### 2. Feature Extraction
  

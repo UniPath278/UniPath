@@ -22,18 +22,16 @@ from xtuner.utils import PROMPT_TEMPLATE
 #                          PART 1  Settings                           #
 #######################################################################
 # Model
-llm_name_or_path = './Qwen2.5-7B-Instruct'
+llm_name_or_path = './qwen7B'
 
 # Data
-data_path = './institution-data/merged_train-h5-institution-add-know-stage3-619.json'
+data_path = './institution-data/UniPath-Instruct.json'
 image_path_list = None
-# pretrained_pth = './work_dirs/stage1-institution/iter_15285.pth'
 pretrained_pth =None
 prompt_template = PROMPT_TEMPLATE.qwen_chat
 
 
-max_length = 13600
-# max_length = 10600
+max_length = 11000
 per_image_length = None
 sample_type='wsi' # 'wsi'or'image'
 
@@ -73,7 +71,7 @@ model = dict(
     type=LLaVAModel,
     freeze_llm=False,
     pretrained_pth=pretrained_pth,
-    train_stage='4',
+    train_stage='3',
     llm=dict(
         type=AutoModelForCausalLM.from_pretrained,
         pretrained_model_name_or_path=llm_name_or_path,
